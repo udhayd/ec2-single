@@ -1,6 +1,6 @@
 # first
 
-Please download the clone the release branch and execute
+Please download the code from release branch and execute below steps.
 
 PREQUISITES : aws cli to be installed (Or) please execute below steps from aws cloud shell .
 
