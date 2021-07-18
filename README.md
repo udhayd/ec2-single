@@ -4,16 +4,16 @@ Please download the code from release branch and execute below steps.
 
 PREQUISITES : aws cli to be installed (Or) please execute below steps from aws cloud shell .
 
+## To download the script
 $ git clone -b release https://github.com/udhayd/first
 
-$ cd ec2-task/ec2
+$ cd ec2-task
 
-$ export AWS_DEFAULT_REGION=us-west-2
+## To Create the Stack
+$ ./provision.sh -n "name of stack"
 
-$ export AWS_ACCESS_KEY=
+## To Destroy the Stack
+$ ./destroy.sh
 
-$ export AWS_SECRET_ACCESS_KEY=
-
-$ ./provision.sh -n ec2-stack
-
-Please verify the websever access through Elastic IP Address.
+## To Access the index.html
+Please verify the websever access through Elastic IP Address http://ipaddress
