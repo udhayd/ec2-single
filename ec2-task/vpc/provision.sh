@@ -17,16 +17,6 @@ usage() {
 #### To validate the Arguments
 if [ $# -eq 2 ]
 then
-    test_var()
-    {
-    [ -z "$1" ] && echo "Value is Empty" && exit 1
-    }
-    read -p "Enter the VPC_CIDR_BLOCK Eg:"10.0.0.0/16": " VPC_CIDR_BLOCK
-    test_var "$VPC_CIDR_BLOCK"
-    read -p "Enter the PUBLIC_SUBNET_CIDR Eg:"10.0.10.0/24,10.0.20.0/24": " PUBLIC_SUBNET_CIDR
-    test_var "$PUBLIC_SUBNET_CIDR"
-    read -p "Enter the PRIVATE_SUBNET_CIDR Eg:"10.0.100.0/24,10.0.200.0/24": " PRIVATE_SUBNET_CIDR
-    test_var "$PRIVATE_SUBNET_CIDR"
     echo  "Executing Stack"
     echo ""
 else
@@ -35,6 +25,9 @@ else
 fi
 
 #### Varible Initialization
+VPC_CIDR_BLOCK=10.10.0.0/20
+PUBLIC_SUBNET_CIDR="10.10.1.0/24,10.10.2.0/24"
+PRIVATE_SUBNET_CIDR="10.10.11.0/24,10.10.12.0/24"
 echo "VPC_STACK_NAME=$2-vpc" >vars.sh
 source vars.sh
 set -ex
