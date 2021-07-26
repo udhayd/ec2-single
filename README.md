@@ -1,11 +1,12 @@
 # first
 
-Please download the code from release branch and execute below steps.
+## Infrastructure As a Code to create VPC & EC2 instance to start with Cloudformation.
+## Following scripts creates Network stack and Ec2 instance with 1GB EBS Volume with EIP , webserver installed.
 
 PREQUISITES : aws cli to be installed (Or) please execute below steps from aws cloud shell .
 
 ## To download the script
-$ git clone -b release https://github.com/udhayd/first
+$ git clone  https://github.com/udhayd/first
 
 $ cd ec2-task
 
