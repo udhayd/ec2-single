@@ -8,7 +8,7 @@ PREQUISITES : aws cli to be installed (Or) please execute below steps from aws c
 ## To download the script
 $ git clone  https://github.com/udhayd/ec2-single
 
-$ cd ec2
+$ cd ec2-single/ec2
 
 ## To Create the Stack
 $ ./provision.sh -n "name of stack"
