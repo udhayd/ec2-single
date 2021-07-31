@@ -6,9 +6,9 @@
 PREQUISITES : aws cli to be installed (Or) please execute below steps from aws cloud shell .
 
 ## To download the script
-$ git clone  https://github.com/udhayd/first
+$ git clone  https://github.com/udhayd/ec2-single
 
-$ cd ec2-task
+$ cd ec2
 
 ## To Create the Stack
 $ ./provision.sh -n "name of stack"
