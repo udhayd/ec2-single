@@ -26,7 +26,7 @@ then
     cd ../vpc
     ./provision.sh -n $2-vpc
     echo ""
-    cd ../
+    cd ../ec2
     echo "Executing EC2 Stack ..."
     echo ""
   fi
