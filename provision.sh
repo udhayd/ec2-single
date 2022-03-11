@@ -34,13 +34,13 @@ fi
 vpc ()
 {
 echo -e '\n' "Network stack doesnt exist, Executing VPC Stack ..." '\n'
-export VPC_STACK_NAME=$2-vpc;echo "VPC_STACK_NAME=$2-vpc" >vars.sh && bash vpc/provision.sh -n $2
+export VPC_STACK_NAME=$1-vpc;echo "VPC_STACK_NAME=$1-vpc" >vars.sh && bash vpc/provision.sh -n $1
 }
 
 ec2 ()
 {
 echo -e '\n' "Executing EC2 Stack ..." '\n'
-export EC2_STACK_NAME=$2-ec2;echo "EC2_STACK_NAME=$2-ec2" >>vars.sh && bash ec2/provision.sh -n $2
+export EC2_STACK_NAME=$1-ec2;echo "EC2_STACK_NAME=$1-ec2" >>vars.sh && bash ec2/provision.sh -n $1
 }
 
 ## Stack Execution
@@ -48,8 +48,8 @@ echo "Executing Script"
 aws cloudformation list-exports|grep "MyVPCID" >/dev/null 2>&1
 if [ $? -ne 0 ]
 then
-    vpc
-    ec2 
+    vpc "$2"
+    ec2 "$2"
 else
-    ec2
+    ec2 "$2"
 fi
