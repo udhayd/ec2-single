@@ -8,13 +8,14 @@ PREQUISITES : aws cli to be installed (Or) please execute below steps from aws c
 ## To download the script
 $ git clone  https://github.com/udhayd/ec2-single
 
-$ cd ec2-single/ec2
 
 ## To Create the Stack
 $ ./provision.sh -n "name of stack"
 
+
 ## To Destroy the Stack
 $ ./destroy.sh
+
 
 ## To Access the index.html
 Please verify the websever access through Elastic IP Address http://ipaddress
