@@ -9,7 +9,7 @@ set -ux
 #### Variable file check
 if [ ! -f vars.sh ]
 then
-echo -e '\n \t' "vars.sh File not found , Please create vars.sh file with appropriate variables"
+echo -e '\n' "vars.sh File not found , Please create vars.sh file with appropriate variables" '\n'
 exit 1
 fi
 source vars.sh
@@ -17,11 +17,9 @@ source vars.sh
 #### Deleting individuals CF stacks
 if  grep STACK_NAME vars.sh >/dev/null 2>&1
 then
-   for i in $(grep STACK_NAME vars.sh|awk -F'=' '{print $2}')
-   do
-   aws cloudformation delete-stack --stack-name $i
-   done
+    aws cloudformation delete-stack --stack-name $(grep EC2_STACK_NAME vars.sh|awk -F'=' '{print $2}')
+    aws cloudformation delete-stack --stack-name $(grep VPC_STACK_NAME vars.sh|awk -F'=' '{print $2}')
 else
-   echo -e '\n \t' "No Stack Name Found in vars.sh file"
+   echo -e '\n' "No Stack Name Found in vars.sh file"  '\n'
 fi
 rm vars.sh
