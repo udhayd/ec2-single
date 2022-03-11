@@ -15,11 +15,8 @@ usage() {
 }
 
 #### To validate the Arguments
-if [ $# -eq 2 ]
+if [ $# -ne 2 ]
 then
-    echo  "Executing Stack"
-    echo ""
-else
     usage
     exit
 fi
@@ -28,9 +25,9 @@ fi
 VPC_CIDR_BLOCK=10.10.0.0/20
 PUBLIC_SUBNET_CIDR="10.10.1.0/24,10.10.2.0/24"
 PRIVATE_SUBNET_CIDR="10.10.11.0/24,10.10.12.0/24"
-echo "VPC_STACK_NAME=$2-vpc" >vars.sh
-source vars.sh
+echo "VPC_STACK_NAME=$2-vpc" >vpc/vars.sh
+source vpc/vars.sh
 set -ex
 
 #### VPC Stack Creation
-aws cloudformation deploy --no-fail-on-empty-changeset --template-file vpc.yaml --stack-name $VPC_STACK_NAME --parameter-overrides VpcCidr=$VPC_CIDR_BLOCK PublicSubnetCidr=$PUBLIC_SUBNET_CIDR PrivateSubnetCidr=$PRIVATE_SUBNET_CIDR  --capabilities CAPABILITY_NAMED_IAM 
+aws cloudformation deploy --no-fail-on-empty-changeset --template-file vpc/vpc.yaml --stack-name $VPC_STACK_NAME --parameter-overrides VpcCidr=$VPC_CIDR_BLOCK PublicSubnetCidr=$PUBLIC_SUBNET_CIDR PrivateSubnetCidr=$PRIVATE_SUBNET_CIDR  --capabilities CAPABILITY_NAMED_IAM 

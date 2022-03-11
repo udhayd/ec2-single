@@ -21,10 +21,17 @@ then
     exit
 fi
 
-#### Varible Initialization
-echo "EC2_STACK_NAME=$2-ec2" >ec2/vars.sh
-source ec2/vars.sh
-set -ex
+echo "Executing Script"
+aws cloudformation list-exports|grep "MyVPCID" >/dev/null 2>&1
+if [ $? -ne 0 ]
+then
+    echo ""
+    echo "Network stack doesnt exist, Executing VPC Stack First ..."
+    export VPC_STACK_NAME=$2-vpc;echo "VPC_STACK_NAME=$2-vpc" >vars.sh && bash vpc/provision.sh -n $2
+else
+    echo ""
+    echo "Executing EC2 Stack ..."
+    export EC2_STACK_NAME=$2-ec2;echo "EC2_STACK_NAME=$2-ec2" >>vars.sh && bash ec2/provision.sh -n $2
+    echo ""
+fi
 
-# EC2 Stack Creation
-aws cloudformation deploy --template-file ec2/ec2.yaml --stack-name $EC2_STACK_NAME --no-fail-on-empty-changeset --capabilities CAPABILITY_IAM
