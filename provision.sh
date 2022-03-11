@@ -9,9 +9,9 @@
 
 #### Function for help
 usage() {
-    echo "Usage: $0 [options]"
-    
-    echo " -n, --name  name of stack"
+    echo -e '\n' "Usage: $0 -n 'name_of_stack'" '\n'
+
+    echo -e '\n' "Example: $0 -n 'test'" '\n'
 }
 
 #### To validate the Arguments
@@ -25,7 +25,7 @@ env|egrep -w 'AWS_CONTAINER_AUTHORIZATION_TOKEN|AWS_DEFAULT_REGION' >/dev/null 2
 
 if [ $? -ne 0 ]
 then
-    echo "One of following variables missing 'AWS_ACCESS_KEY_ID|AWS_SECRET_ACCESS_KEY|AWS_DEFAULT_REGION', Please configure the same"
+    echo -e '\n' "One of following variables missing 'AWS_ACCESS_KEY_ID|AWS_SECRET_ACCESS_KEY|AWS_DEFAULT_REGION', Please configure the same" '\n'
     exit
 fi
 
@@ -33,12 +33,10 @@ echo "Executing Script"
 aws cloudformation list-exports|grep "MyVPCID" >/dev/null 2>&1
 if [ $? -ne 0 ]
 then
-    echo ""
-    echo "Network stack doesnt exist, Executing VPC Stack First ..."
+    echo -e '\n' "Network stack doesnt exist, Executing VPC Stack ..." '\n'
     export VPC_STACK_NAME=$2-vpc;echo "VPC_STACK_NAME=$2-vpc" >vars.sh && bash vpc/provision.sh -n $2
 else
-    echo ""
-    echo "Executing EC2 Stack ..."
+    echo -e '\n' "Executing EC2 Stack ..." '\n'
     export EC2_STACK_NAME=$2-ec2;echo "EC2_STACK_NAME=$2-ec2" >>vars.sh && bash ec2/provision.sh -n $2
     echo ""
 fi
