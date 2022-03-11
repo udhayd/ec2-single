@@ -21,6 +21,14 @@ then
     exit
 fi
 
+env|egrep -w 'AWS_CONTAINER_AUTHORIZATION_TOKEN|AWS_DEFAULT_REGION' >/dev/null 2>&1 || env|egrep -w 'AWS_ACCESS_KEY_ID|AWS_SECRET_ACCESS_KEY|AWS_DEFAULT_REGION' >/dev/null 2>&1
+
+if [ $? -ne 0 ]
+then
+    echo "One of following variables missing 'AWS_ACCESS_KEY_ID|AWS_SECRET_ACCESS_KEY|AWS_DEFAULT_REGION', Please configure the same"
+    exit
+fi
+
 echo "Executing Script"
 aws cloudformation list-exports|grep "MyVPCID" >/dev/null 2>&1
 if [ $? -ne 0 ]
@@ -34,4 +42,3 @@ else
     export EC2_STACK_NAME=$2-ec2;echo "EC2_STACK_NAME=$2-ec2" >>vars.sh && bash ec2/provision.sh -n $2
     echo ""
 fi
-
